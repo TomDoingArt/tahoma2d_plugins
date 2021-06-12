@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
-cmake_policy(SET CMP0081 OLD)
+cmake_minimum_required(VERSION 2.4)
 project(dwango_opentoonz_plugins)
 
 if(WIN32)
@@ -16,21 +15,18 @@ if(WIN32)
     endif()
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /openmp")
-    set(PLUGIN_UTILITY_LIB "${CMAKE_CURRENT_SOURCE_DIR}/opentoonz_plugin_utility/lib/${CMAKE_CFG_INTDIR}/libopentoonz_plugin_utility.lib")
 endif(WIN32)
 
 if(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++")
-    set(PLUGIN_UTILITY_LIB "${CMAKE_CURRENT_SOURCE_DIR}/opentoonz_plugin_utility/lib/${CMAKE_CFG_INTDIR}/libopentoonz_plugin_utility.a")
 endif(APPLE)
 
 if(UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -fvisibility=hidden")
-    set(PLUGIN_UTILITY_LIB "${CMAKE_CURRENT_SOURCE_DIR}/opentoonz_plugin_utility/lib/${CMAKE_CFG_INTDIR}/libopentoonz_plugin_utility.a")
 endif(UNIX)
 
 find_package(OpenCV REQUIRED)
-set(LIBS ${OpenCV_LIBS} ${PLUGIN_UTILITY_LIB})
+set(LIBS ${OpenCV_LIBS} opentoonz_plugin_utility) 
 
 include_directories(opentoonz_plugin_utility/include
                     opentoonz_plugin_utility/plugin_sdk/core
