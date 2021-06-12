@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 3.0)
+cmake_policy(SET CMP0081 OLD)
 project(dwango_opentoonz_plugins)
 
 if(WIN32)
